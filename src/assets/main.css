@@ -1,0 +1,334 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   Design tokens — premium dark-teal / cyan agency aesthetic
+   ============================================================ */
+@theme {
+  --color-ink-950: #020707;
+  --color-ink-900: #031111;
+  --color-ink-850: #051a1a;
+  --color-ink-800: #072222;
+  --color-ink-700: #0a2f2f;
+
+  --color-aqua-50: #eafffb;
+  --color-aqua-100: #c8fff7;
+  --color-aqua-200: #8ff8ec;
+  --color-aqua-300: #4aefe0;
+  --color-primary: #00e5d4;
+  --color-primary-soft: #0a5f61;
+  --color-primary-dim: #0f8f88;
+
+  --color-surface: #f4ffff;
+  --color-muted: #9bafaf;
+  --color-muted-dim: #6f8484;
+
+  --color-line: rgb(0 229 212 / 0.2);
+  --color-line-strong: rgb(0 229 212 / 0.42);
+  --color-line-soft: rgb(0 229 212 / 0.1);
+
+  --font-display: 'Sora', 'Noto Sans Khmer', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', 'Noto Sans Khmer', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-4xl: 2rem;
+  --radius-5xl: 2.75rem;
+  --radius-6xl: 3.5rem;
+
+  --shadow-glow: 0 0 0 1px rgb(0 229 212 / 0.18), 0 24px 70px -28px rgb(0 229 212 / 0.4);
+  --shadow-glow-strong: 0 0 0 1px rgb(0 229 212 / 0.4), 0 30px 90px -30px rgb(0 229 212 / 0.62);
+  --shadow-card: 0 40px 80px -48px rgb(0 0 0 / 0.95);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-float-slow: float-slow 14s ease-in-out infinite;
+  --animate-pulse-dot: pulse-dot 2.6s var(--ease-soft) infinite;
+  --animate-spin-slow: spin 26s linear infinite;
+  --animate-glow-breathe: glow-breathe 9s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0) scale(1.04);
+  }
+}
+@keyframes pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(0 229 212 / 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 9px rgb(0 229 212 / 0);
+  }
+}
+@keyframes glow-breathe {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: translate3d(0, -10px, 0) scale(1.06);
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-line);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 7rem;
+    /* `clip` (not `hidden`) guarantees no horizontal scrollbar without
+       creating a scroll container that would break position: sticky. */
+    overflow-x: clip;
+  }
+
+  @media (max-width: 768px) {
+    html {
+      scroll-padding-top: 5.5rem;
+    }
+  }
+
+  body {
+    background-color: var(--color-ink-950);
+    color: var(--color-surface);
+    font-family: var(--font-sans);
+    font-feature-settings: 'ss01', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: rgb(0 229 212 / 0.28);
+    color: var(--color-aqua-50);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Slim, on-theme scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-ink-950);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(0 229 212 / 0.22);
+    border-radius: 999px;
+    border: 3px solid var(--color-ink-950);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(0 229 212 / 0.45);
+  }
+
+  html[data-locale='km'] body {
+    font-family: 'Noto Sans Khmer', var(--font-sans);
+  }
+  html[data-locale='km'] h1,
+  html[data-locale='km'] h2,
+  html[data-locale='km'] h3,
+  html[data-locale='km'] h4 {
+    font-family: 'Noto Sans Khmer', var(--font-display);
+    letter-spacing: 0;
+    line-height: 1.32;
+  }
+}
+
+/* ============================================================
+   Utilities
+   ============================================================ */
+@utility container-x {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 84rem;
+  padding-inline: 1.25rem;
+  @media (min-width: 640px) {
+    padding-inline: 2rem;
+  }
+  @media (min-width: 1280px) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Frosted dark-teal panel */
+@utility panel {
+  background:
+    linear-gradient(158deg, rgb(0 229 212 / 0.055) 0%, rgb(0 229 212 / 0) 46%),
+    rgb(3 17 17 / 0.72);
+  border: 1px solid var(--color-line);
+  backdrop-filter: blur(18px) saturate(120%);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
+}
+
+@utility panel-solid {
+  background:
+    linear-gradient(158deg, rgb(0 229 212 / 0.07) 0%, rgb(0 229 212 / 0) 44%),
+    rgb(2 7 7 / 0.92);
+  border: 1px solid var(--color-line);
+}
+
+@utility text-gradient {
+  background: linear-gradient(105deg, #f4ffff 6%, #8ff8ec 52%, #00e5d4 96%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility text-muted {
+  color: var(--color-muted);
+}
+
+/* Hairline cyan glow ring on hover */
+@utility glow-ring {
+  transition:
+    border-color 0.45s var(--ease-out-expo),
+    box-shadow 0.45s var(--ease-out-expo),
+    transform 0.45s var(--ease-out-expo);
+
+  &:hover {
+    border-color: var(--color-line-strong);
+    box-shadow: var(--shadow-glow-strong);
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+@utility pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition:
+    transform 0.4s var(--ease-out-expo),
+    box-shadow 0.4s var(--ease-out-expo),
+    background-color 0.4s var(--ease-out-expo),
+    border-color 0.4s var(--ease-out-expo),
+    color 0.4s var(--ease-out-expo);
+}
+
+/* Film-grain / noise texture */
+@utility grain {
+  position: relative;
+  isolation: isolate;
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.28;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  }
+}
+
+@utility glow-orb {
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+/* Scroll-reveal */
+@utility reveal {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+  transition:
+    opacity 0.9s var(--ease-out-expo),
+    transform 0.9s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+  &.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* ============================================================
+   Keyframes used by Vue <TransitionGroup> / JS-driven animation
+   ============================================================ */
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes line-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ============================================================
+   Accessibility — honour reduced motion everywhere
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="aqua" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#F4FFFF" />
+      <stop offset="0.55" stop-color="#8FF8EC" />
+      <stop offset="1" stop-color="#00E5D4" />
+    </linearGradient>
+    <radialGradient id="wash" cx="0.78" cy="0.1" r="0.9">
+      <stop offset="0" stop-color="#00E5D4" stop-opacity="0.30" />
+      <stop offset="1" stop-color="#00E5D4" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="wash2" cx="0.08" cy="0.95" r="0.8">
+      <stop offset="0" stop-color="#0A5F61" stop-opacity="0.55" />
+      <stop offset="1" stop-color="#0A5F61" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0H0V60" fill="none" stroke="#00E5D4" stroke-opacity="0.10" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#020707" />
+  <rect width="1200" height="630" fill="url(#wash)" />
+  <rect width="1200" height="630" fill="url(#wash2)" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+
+  <circle cx="960" cy="230" r="250" fill="none" stroke="#00E5D4" stroke-opacity="0.22" stroke-width="1.5" />
+  <circle cx="960" cy="230" r="330" fill="none" stroke="#00E5D4" stroke-opacity="0.10" stroke-width="1.5" />
+
+  <rect x="80" y="86" width="256" height="46" rx="23" fill="#00E5D4" fill-opacity="0.10" stroke="#00E5D4" stroke-opacity="0.35" />
+  <text x="208" y="116" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" letter-spacing="4" fill="#8FF8EC" text-anchor="middle">FULL-STACK DEVELOPER</text>
+
+  <text x="80" y="268" font-family="Segoe UI, Arial, sans-serif" font-size="76" font-weight="700" fill="#F4FFFF" letter-spacing="-2">I build modern</text>
+  <text x="80" y="352" font-family="Segoe UI, Arial, sans-serif" font-size="76" font-weight="700" fill="url(#aqua)" letter-spacing="-2">web experiences</text>
+  <text x="80" y="436" font-family="Segoe UI, Arial, sans-serif" font-size="76" font-weight="700" fill="#F4FFFF" letter-spacing="-2">that work.</text>
+
+  <circle cx="88" cy="504" r="6" fill="#00E5D4" />
+  <text x="112" y="512" font-family="Segoe UI, Arial, sans-serif" font-size="24" fill="#9BAFAF">Chorm Chandouern · github.com/Doeurn708</text>
+
+  <rect x="80" y="556" width="1040" height="2" fill="#00E5D4" fill-opacity="0.28" />
+</svg>
