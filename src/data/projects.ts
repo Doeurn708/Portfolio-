@@ -37,18 +37,18 @@ export interface Project {
 }
 
 export const profile = {
-  name: 'Chorm Chandouern',
-  shortName: 'CHORM CHANDOUERN',
-  role: 'Full-Stack Developer',
-  location: 'Cambodia',
-  github: 'https://github.com/Doeurn708',
-  githubHandle: 'Doeurn708',
-  email: 'chormchandouern@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/Doeurn708',
-  telegram: 'https://t.me/Doeurn708',
+  name: "Chorm Chandouern",
+  shortName: "CHORM CHANDOUERN",
+  role: "Full-Stack Developer",
+  location: "Cambodia",
+  github: "https://github.com/Doeurn708",
+  githubHandle: "Doeurn708",
+  email: "chandouern708@gmail.com",
+  linkedin: "https://www.linkedin.com/in/Doeurn708",
+  telegram: "https://t.me/chorm_chandoeurn",
   available: true,
-  availabilityLabel: 'Available for development projects',
-} as const
+  availabilityLabel: "Available for development projects",
+} as const;
 
 export const projects: Project[] = [
   {

@@ -1,28 +1,33 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { ArrowDown, ArrowRight, Sparkles } from 'lucide-vue-next'
-import { useLocale } from '@/composables/useLocale'
-import imageWebp from '@/assets/image.webp'
-import imageJpg from '@/assets/image.jpg'
+import { onMounted, ref } from "vue";
+import { ArrowDown, ArrowRight, Sparkles } from "lucide-vue-next";
+import { useLocale } from "@/composables/useLocale";
+import imageWebp from "@/assets/image.webp";
+import imageJpg from "@/assets/image.jpg";
+import cvPdf from "@/assets/cv.pdf";
 
-const { t } = useLocale()
-const root = ref<HTMLElement | null>(null)
+const { t } = useLocale();
+const root = ref<HTMLElement | null>(null);
 
 const headline = [
-  { key: 'hero.line1', accent: false },
-  { key: 'hero.line2', accent: true },
-  { key: 'hero.line3', accent: false },
-]
+  { key: "hero.line1", accent: false },
+  { key: "hero.line2", accent: true },
+  { key: "hero.line3", accent: false },
+];
 
 function scrollTo(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  document
+    .getElementById(id)
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 onMounted(() => {
   // The hero is above the fold, so its reveal states resolve immediately
   // rather than waiting for an intersection callback.
-  root.value?.querySelectorAll<HTMLElement>('.reveal').forEach((el) => el.classList.add('is-visible'))
-})
+  root.value
+    ?.querySelectorAll<HTMLElement>(".reveal")
+    .forEach((el) => el.classList.add("is-visible"));
+});
 </script>
 
 <template>
@@ -33,10 +38,14 @@ onMounted(() => {
     aria-labelledby="hero-title"
   >
     <div class="container-x">
-      <div class="grid items-center gap-14 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-10 xl:gap-16">
+      <div
+        class="grid items-center gap-14 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-10 xl:gap-16"
+      >
         <!-- ============ Portrait (left) ============ -->
         <div class="order-2 lg:order-1">
-          <div class="reveal relative mx-auto w-full max-w-[26rem] lg:max-w-none">
+          <div
+            class="reveal relative mx-auto w-full max-w-[26rem] lg:max-w-none"
+          >
             <!-- Organic backing shapes -->
             <div
               class="absolute -top-6 left-0 size-56 rounded-[46%_54%_38%_62%/52%_42%_58%_48%] border border-line bg-ink-800/40 blur-[2px] sm:-top-10 sm:-left-8 sm:size-80"
@@ -90,8 +99,13 @@ onMounted(() => {
               <div
                 class="pill animate-float-slow absolute -bottom-4 left-1/2 -translate-x-1/2 border border-line-strong bg-ink-900/90 px-5 py-2.5 text-[0.66rem] font-semibold tracking-[0.22em] text-aqua-100 uppercase backdrop-blur-md"
               >
-                <Sparkles :size="13" :stroke-width="1.7" class="text-primary" aria-hidden="true" />
-                {{ t('hero.badgeRole') }}
+                <Sparkles
+                  :size="13"
+                  :stroke-width="1.7"
+                  class="text-primary"
+                  aria-hidden="true"
+                />
+                {{ t("hero.badgeRole") }}
               </div>
             </div>
           </div>
@@ -104,7 +118,7 @@ onMounted(() => {
             class="reveal pill border border-line bg-primary/8 px-4 py-2 text-[0.64rem] font-semibold tracking-[0.34em] text-aqua-200 uppercase"
             :style="{ '--reveal-delay': '60ms' }"
           >
-            {{ t('hero.eyebrow') }}
+            {{ t("hero.eyebrow") }}
           </p>
 
           <!-- Headline -->
@@ -135,7 +149,7 @@ onMounted(() => {
             class="reveal mt-6 max-w-xl text-[0.95rem] leading-relaxed text-aqua-100/70 sm:text-[1.02rem]"
             :style="{ '--reveal-delay': '300ms' }"
           >
-            {{ t('hero.alt') }}
+            {{ t("hero.alt") }}
           </p>
 
           <!-- Description -->
@@ -143,7 +157,7 @@ onMounted(() => {
             class="reveal mt-4 max-w-xl text-[0.92rem] leading-[1.75] text-muted sm:text-[0.98rem]"
             :style="{ '--reveal-delay': '360ms' }"
           >
-            {{ t('hero.description') }}
+            {{ t("hero.description") }}
           </p>
 
           <!-- CTAs -->
@@ -151,30 +165,30 @@ onMounted(() => {
             class="reveal mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
             :style="{ '--reveal-delay': '440ms' }"
           >
-            <button
-              type="button"
+            <a
+              :href="cvPdf"
+              download="Chorm chandoeurn-CV.pdf"
               class="pill group relative overflow-hidden border border-primary bg-primary px-7 py-4 text-[0.74rem] font-semibold tracking-[0.18em] text-ink-950 uppercase hover:shadow-[0_0_0_1px_rgba(0,229,212,0.5),0_26px_70px_-24px_rgba(0,229,212,0.7)]"
-              @click="scrollTo('work')"
             >
               <span
                 class="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-full"
                 aria-hidden="true"
               />
-              <span class="relative">{{ t('hero.ctaPrimary') }}</span>
+              <span class="relative">Download CV</span>
               <ArrowRight
                 :size="15"
                 :stroke-width="2"
                 class="relative transition-transform duration-400 group-hover:translate-x-1"
                 aria-hidden="true"
               />
-            </button>
+            </a>
 
             <button
               type="button"
               class="pill group border border-line bg-white/2 px-7 py-4 text-[0.74rem] font-semibold tracking-[0.18em] text-surface uppercase hover:border-line-strong hover:bg-primary/8 hover:shadow-glow"
-              @click="scrollTo('contact')"
+              @click="scrollTo('work')"
             >
-              {{ t('hero.ctaSecondary') }}
+              {{ t("hero.ctaPrimary") }}
             </button>
           </div>
 
@@ -188,7 +202,7 @@ onMounted(() => {
                 class="animate-pulse-dot size-2 rounded-full bg-primary"
                 aria-hidden="true"
               />
-              {{ t('hero.available') }}
+              {{ t("hero.available") }}
             </p>
 
             <button
@@ -196,7 +210,7 @@ onMounted(() => {
               class="group flex items-center gap-2 text-[0.68rem] font-medium tracking-[0.24em] text-muted uppercase hover:text-aqua-200"
               @click="scrollTo('about')"
             >
-              {{ t('hero.scroll') }}
+              {{ t("hero.scroll") }}
               <ArrowDown
                 :size="13"
                 :stroke-width="1.8"

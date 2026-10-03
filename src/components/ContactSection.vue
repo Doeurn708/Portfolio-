@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { ArrowUpRight, Check, Copy, Github, Linkedin, Mail, Send } from 'lucide-vue-next'
+import { ArrowUpRight, Check, CircleAlert, Copy, Github, Linkedin, Mail, Send } from 'lucide-vue-next'
 import { profile } from '@/data/projects'
 import { useLocale } from '@/composables/useLocale'
 import { useReveal } from '@/composables/useReveal'
+import { telegramConfig } from '@/config/telegram'
 import SectionHeading from './SectionHeading.vue'
 
 const { t } = useLocale()
@@ -20,6 +21,7 @@ interface FormState {
 const form = ref<FormState>({ name: '', email: '', subject: '', message: '' })
 const errors = ref<Partial<Record<keyof FormState, string>>>({})
 const notice = ref('')
+const noticeType = ref<'success' | 'error'>('success')
 const copied = ref(false)
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
@@ -27,11 +29,11 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 const channels = computed(() => [
   { key: 'contact.github', href: profile.github, icon: Github, handle: 'github.com/Doeurn708' },
   { key: 'contact.email', href: `mailto:${profile.email}`, icon: Mail, handle: profile.email },
-  { key: 'contact.telegram', href: profile.telegram, icon: Send, handle: 't.me/Doeurn708' },
+  { key: 'contact.telegram', href: profile.telegram, icon: Send, handle: 't.me/chorm_chandoeurn' },
   { key: 'contact.linkedin', href: profile.linkedin, icon: Linkedin, handle: 'linkedin.com/in/Doeurn708' },
 ])
 
-function validate(): boolean {
+function validate(): boolean {  
   const next: Partial<Record<keyof FormState, string>> = {}
   if (!form.value.name.trim()) next.name = t('contact.errorName')
   if (!emailPattern.test(form.value.email.trim())) next.email = t('contact.invalidEmail')
@@ -41,16 +43,62 @@ function validate(): boolean {
   return Object.keys(next).length === 0
 }
 
-function submit() {
+async function submit() {
   notice.value = ''
+
   if (!validate()) return
 
-  const subject = `[Portfolio] ${form.value.subject.trim()} — ${form.value.name.trim()}`
-  const body = `${form.value.message.trim()}\n\n—\n${form.value.name.trim()}\n${form.value.email.trim()}`
-  const href = `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  const telegramMessage = [
+    '📩 New Portfolio Contact',
+    '',
+    `👤 Name: ${form.value.name.trim()}`,
+    `📧 Email: ${form.value.email.trim()}`,
+    `📝 Subject: ${form.value.subject.trim()}`,
+    '',
+    '💬 Message:',
+    form.value.message.trim(),
+  ].join('\n')
 
-  notice.value = t('contact.success')
-  window.location.href = href
+  const telegramUrl =
+    `https://api.telegram.org/bot${telegramConfig.botToken}/sendMessage`
+
+  try {
+    const response = await fetch(telegramUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chat_id: telegramConfig.chatId,
+        text: telegramMessage,
+      }),
+    })
+
+    const result = await response.json()
+
+    console.log('HTTP status:', response.status)
+    console.log('Telegram response:', result)
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.description || 'Telegram message failed')
+    }
+
+    noticeType.value = 'success'
+    notice.value = t('contact.telegramSuccess')
+
+    form.value = {
+      name: '',
+      email: '',
+      subject: '',
+      message: '',
+    }
+
+    errors.value = {}
+  } catch (error) {
+    console.error('Telegram error:', error)
+    noticeType.value = 'error'
+    notice.value = t('contact.telegramError')
+  }
 }
 
 async function copyEmail() {
@@ -271,10 +319,21 @@ async function copyEmail() {
 
           <p
             v-if="notice"
-            class="flex items-center gap-2 rounded-2xl border border-primary/35 bg-primary/8 px-4 py-3 text-[0.8rem] text-aqua-100"
-            role="status"
+            class="flex items-center gap-2 rounded-2xl border px-4 py-3 text-[0.8rem]"
+            :class="
+              noticeType === 'error'
+                ? 'border-red-400/40 bg-red-500/8 text-red-200'
+                : 'border-primary/35 bg-primary/8 text-aqua-100'
+            "
+            :role="noticeType === 'error' ? 'alert' : 'status'"
           >
-            <Check :size="14" :stroke-width="2" aria-hidden="true" />
+            <CircleAlert
+              v-if="noticeType === 'error'"
+              :size="14"
+              :stroke-width="2"
+              aria-hidden="true"
+            />
+            <Check v-else :size="14" :stroke-width="2" aria-hidden="true" />
             {{ notice }}
           </p>
 

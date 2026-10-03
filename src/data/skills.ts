@@ -49,7 +49,6 @@ export const skillGroups: SkillGroup[] = [
       { name: 'PHP', verified: true },
       { name: 'Laravel' },
       { name: 'Java', verified: true },
-      { name: 'Spring Boot' },
       { name: 'REST API', verified: true, note: 'CRUD endpoint groups in PHP' },
     ],
   },
@@ -99,7 +98,7 @@ export const skillGroups: SkillGroup[] = [
     skills: [
       { name: 'Cloudinary' },
       { name: 'AWS' },
-      { name: 'Deployment' },
+      // { name: 'Deployment' },
     ],
   },
 ]
