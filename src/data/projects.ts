@@ -360,41 +360,41 @@ export const projects: Project[] = [
     updated: '2026-07-04',
     category: 'Frontend',
   },
-  {
-    repo: 'Java_OOP',
-    title: 'Java OOP Foundations',
-    tagline:
-      'A structured Java practice suite covering encapsulation, inheritance, polymorphism, constructors and method overriding.',
-    overview:
-      'A collection of focused Java programs, each isolating one object-oriented concept. Every concept lives in its own package with an executable entry point, making the behaviour of each principle easy to run and compare side by side.',
-    problem:
-      'Reading about encapsulation, inheritance and polymorphism rarely sticks — the concepts only become clear when each one is demonstrated in isolation with runnable code.',
-    solution:
-      'Create a dedicated package per principle, keep each demo small and focused on a single idea, and give every demo an Exec* main class so the behaviour can be executed and compared directly.',
-    features: [
-      { label: 'Encapsulation', detail: 'Encapsulation/User.java with getter / setter validation' },
-      { label: 'Inheritance', detail: 'DemoInheritance — Animal, Human, Mamal, Reptile' },
-      { label: 'Polymorphism', detail: 'Polymorphism — Animal, Dog, Fish with polymorphic dispatch' },
-      { label: 'Method overriding', detail: 'DemoOverride — Cart, BirthdayCart' },
-      { label: 'Constructors', detail: 'Contructor — Car, Car1, Car2' },
-      { label: 'super keyword', detail: 'Super_keyword — Vehicle, Car' },
-      { label: 'Runnable demos', detail: 'Every package has its own Exec* main class' },
-    ],
-    stack: ['Java', 'OOP'],
-    architecture: [
-      'src/Encapsulation — access control demo',
-      'src/DemoInheritance — class hierarchy demo',
-      'src/Polymorphism — runtime dispatch demo',
-      'src/DemoOverride — method overriding demo',
-      'src/Contructor — constructor variants',
-      'src/Super_keyword — super usage',
-      'src/DemoEmployyee — applied class example',
-      'src/Example_Quiz — practice exercises',
-    ],
-    language: 'Java',
-    updated: '2026-02-19',
-    category: 'Learning',
-  },
+  // {
+  //   repo: 'Java_OOP',
+  //   title: 'Java OOP Foundations',
+  //   tagline:
+  //     'A structured Java practice suite covering encapsulation, inheritance, polymorphism, constructors and method overriding.',
+  //   overview:
+  //     'A collection of focused Java programs, each isolating one object-oriented concept. Every concept lives in its own package with an executable entry point, making the behaviour of each principle easy to run and compare side by side.',
+  //   problem:
+  //     'Reading about encapsulation, inheritance and polymorphism rarely sticks — the concepts only become clear when each one is demonstrated in isolation with runnable code.',
+  //   solution:
+  //     'Create a dedicated package per principle, keep each demo small and focused on a single idea, and give every demo an Exec* main class so the behaviour can be executed and compared directly.',
+  //   features: [
+  //     { label: 'Encapsulation', detail: 'Encapsulation/User.java with getter / setter validation' },
+  //     { label: 'Inheritance', detail: 'DemoInheritance — Animal, Human, Mamal, Reptile' },
+  //     { label: 'Polymorphism', detail: 'Polymorphism — Animal, Dog, Fish with polymorphic dispatch' },
+  //     { label: 'Method overriding', detail: 'DemoOverride — Cart, BirthdayCart' },
+  //     { label: 'Constructors', detail: 'Contructor — Car, Car1, Car2' },
+  //     { label: 'super keyword', detail: 'Super_keyword — Vehicle, Car' },
+  //     { label: 'Runnable demos', detail: 'Every package has its own Exec* main class' },
+  //   ],
+  //   stack: ['Java', 'OOP'],
+  //   architecture: [
+  //     'src/Encapsulation — access control demo',
+  //     'src/DemoInheritance — class hierarchy demo',
+  //     'src/Polymorphism — runtime dispatch demo',
+  //     'src/DemoOverride — method overriding demo',
+  //     'src/Contructor — constructor variants',
+  //     'src/Super_keyword — super usage',
+  //     'src/DemoEmployyee — applied class example',
+  //     'src/Example_Quiz — practice exercises',
+  //   ],
+  //   language: 'Java',
+  //   updated: '2026-02-19',
+  //   category: 'Learning',
+  // },
   {
     repo: 'Portfolio',
     title: 'Developer Portfolio — Vue 3 + Tailwind',
