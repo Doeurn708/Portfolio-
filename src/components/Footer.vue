@@ -41,13 +41,13 @@ function backToTop() {
 
         <!-- Links -->
         <nav class="reveal" :style="{ '--reveal-delay': '120ms' }" aria-label="Footer">
-          <ul class="flex flex-wrap gap-2.5">
+          <ul class="flex flex-wrap gap-2">
             <li v-for="link in links" :key="link.label">
               <a
                 :href="link.href"
                 :target="link.href.startsWith('mailto:') ? undefined : '_blank'"
                 rel="noopener noreferrer"
-                class="pill group border border-line bg-white/[0.02] px-4 py-2.5 text-[0.7rem] font-semibold tracking-[0.14em] text-muted uppercase hover:border-line-strong hover:bg-primary/8 hover:text-primary"
+                class="pill group border border-line bg-white/[0.02] px-3 py-2 text-[0.64rem] font-semibold tracking-[0.12em] text-muted uppercase hover:border-line-strong hover:bg-primary/8 hover:text-primary sm:px-4 sm:py-2.5 sm:text-[0.7rem] sm:tracking-[0.14em]"
               >
                 <component
                   :is="link.icon"

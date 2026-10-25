@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import { Github, Linkedin, Menu, X } from 'lucide-vue-next'
 import { profile } from '@/data/projects'
 import { useLocale, type Locale } from '@/composables/useLocale'
 
 const { t, locale, setLocale, toggleLocale } = useLocale()
+const router = useRouter()
 
 interface NavItem {
   id: string
@@ -38,7 +40,10 @@ function close() {
 function scrollTo(id: string) {
   close()
   const el = document.getElementById(id)
-  if (!el) return
+  if (!el) {
+    router.push({ path: '/', hash: id === 'home' ? undefined : `#${id}` })
+    return
+  }
   el.scrollIntoView({ behavior: 'smooth', block: 'start' })
   // Keep the URL shareable without triggering router navigation.
   window.history.replaceState(null, '', id === 'home' ? '/' : `/#${id}`)
@@ -78,9 +83,9 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <header class="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 sm:pt-5">
+  <header class="fixed inset-x-0 top-0 z-50 px-2 pt-2 sm:px-4 sm:pt-4 md:px-6 md:pt-5">
     <nav
-      class="pill mx-auto w-full max-w-[84rem] justify-between gap-3 border px-3 py-2.5 transition-all duration-500 sm:px-4"
+      class="pill mx-auto w-full max-w-[84rem] justify-between gap-2 border px-2 py-2 transition-all duration-500 sm:gap-3 sm:px-3 sm:py-2.5 md:px-4"
       :class="
         condensed
           ? 'panel-solid shadow-[0_18px_50px_-30px_rgba(0,0,0,0.9)]'
@@ -91,12 +96,12 @@ onBeforeUnmount(() => {
       <!-- Brand -->
       <a
         href="#home"
-        class="pill shrink-0 px-2 text-[0.78rem] font-semibold tracking-[0.2em] text-surface hover:text-aqua-200 sm:text-[0.82rem]"
+        class="pill shrink-0 px-1.5 text-[0.72rem] font-semibold tracking-[0.16em] text-surface hover:text-aqua-200 sm:px-2 sm:text-[0.78rem] sm:tracking-[0.2em] md:text-[0.82rem]"
         :aria-label="`${profile.name} — ${t('hero.scroll')} top`"
         @click.prevent="scrollTo('home')"
       >
         <span
-          class="grid size-7 place-items-center rounded-full border border-line-strong bg-primary/10 font-display text-[0.62rem] tracking-normal text-primary"
+          class="grid size-6 place-items-center rounded-full border border-line-strong bg-primary/10 font-display text-[0.56rem] tracking-normal text-primary sm:size-7 sm:text-[0.62rem]"
           aria-hidden="true"
         >
           CC
@@ -191,18 +196,18 @@ onBeforeUnmount(() => {
       </div>
     </nav>
 
-    <!-- Mobile drawer -->
-    <Transition
-      enter-active-class="transition duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]"
-      enter-from-class="opacity-0 -translate-y-3"
-      leave-active-class="transition duration-200 ease-in"
-      leave-to-class="opacity-0 -translate-y-2"
-    >
-      <div
-        v-if="open"
-        id="mobile-nav"
-        class="panel-solid mx-auto mt-2 w-full max-w-[84rem] overflow-hidden rounded-[1.75rem] p-2 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.95)] lg:hidden"
+      <!-- Mobile drawer -->
+      <Transition
+        enter-active-class="transition duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]"
+        enter-from-class="opacity-0 -translate-y-3"
+        leave-active-class="transition duration-200 ease-in"
+        leave-to-class="opacity-0 -translate-y-2"
       >
+        <div
+          v-if="open"
+          id="mobile-nav"
+          class="panel-solid mx-auto mt-1.5 w-full max-w-[84rem] overflow-hidden rounded-[1.5rem] p-1.5 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.95)] sm:mt-2 sm:rounded-[1.75rem] sm:p-2 lg:hidden"
+        >
         <ul class="flex flex-col">
           <li v-for="(item, index) in navItems" :key="item.id">
             <a

@@ -34,17 +34,17 @@ onMounted(() => {
   <section
     id="home"
     ref="root"
-    class="relative flex min-h-[100svh] items-center overflow-hidden pt-28 pb-16 sm:pt-32 lg:pt-36 lg:pb-24"
+    class="relative flex min-h-[100svh] items-center overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-20 xl:pt-36 xl:pb-24"
     aria-labelledby="hero-title"
   >
     <div class="container-x">
       <div
-        class="grid items-center gap-14 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-10 xl:gap-16"
+        class="grid items-center gap-10 sm:gap-12 md:gap-14 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-10 xl:gap-16"
       >
         <!-- ============ Portrait (left) ============ -->
         <div class="order-2 lg:order-1">
           <div
-            class="reveal relative mx-auto w-full max-w-[26rem] lg:max-w-none"
+            class="reveal relative mx-auto w-full max-w-[22rem] sm:max-w-[24rem] md:max-w-[26rem] lg:max-w-none"
           >
             <!-- Organic backing shapes -->
             <div
@@ -65,7 +65,7 @@ onMounted(() => {
             <!-- Portrait frame: organic mask + thin cyan ring -->
             <div class="grain relative">
               <div
-                class="relative aspect-4/5 w-full overflow-hidden rounded-[10rem_10rem_2.5rem_2.5rem] border border-line-strong bg-ink-900 shadow-[0_50px_120px_-50px_rgba(0,229,212,0.42)] sm:rounded-[14rem_14rem_3rem_3rem]"
+                class="relative aspect-4/5 w-full overflow-hidden rounded-[8rem_8rem_2rem_2rem] border border-line-strong bg-ink-900 shadow-[0_50px_120px_-50px_rgba(0,229,212,0.42)] sm:rounded-[10rem_10rem_2.25rem_2.25rem] md:rounded-[12rem_12rem_2.75rem_2.75rem] lg:rounded-[14rem_14rem_3rem_3rem]"
               >
                 <picture>
                   <source :srcset="imageWebp" type="image/webp" />
@@ -124,7 +124,7 @@ onMounted(() => {
           <!-- Headline -->
           <h1
             id="hero-title"
-            class="reveal mt-7 text-[clamp(2.6rem,8.2vw,5.6rem)] leading-[0.94] font-semibold tracking-[-0.04em] text-surface"
+            class="reveal mt-6 text-[clamp(2.4rem,8vw,5.6rem)] leading-[0.95] font-semibold tracking-[-0.04em] text-surface sm:mt-7"
             :style="{ '--reveal-delay': '140ms' }"
           >
             <span
@@ -162,13 +162,13 @@ onMounted(() => {
 
           <!-- CTAs -->
           <div
-            class="reveal mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
+            class="reveal mt-8 flex flex-col gap-2.5 sm:mt-10 sm:flex-row sm:items-center sm:gap-3"
             :style="{ '--reveal-delay': '440ms' }"
           >
             <a
               :href="cvPdf"
               download="Chorm chandoeurn-CV.pdf"
-              class="pill group relative overflow-hidden border border-primary bg-primary px-7 py-4 text-[0.74rem] font-semibold tracking-[0.18em] text-ink-950 uppercase hover:shadow-[0_0_0_1px_rgba(0,229,212,0.5),0_26px_70px_-24px_rgba(0,229,212,0.7)]"
+              class="pill group relative overflow-hidden border border-primary bg-primary px-5 py-3 text-[0.68rem] font-semibold tracking-[0.14em] text-ink-950 uppercase hover:shadow-[0_0_0_1px_rgba(0,229,212,0.5),0_26px_70px_-24px_rgba(0,229,212,0.7)] sm:px-7 sm:py-4 sm:text-[0.74rem] sm:tracking-[0.18em]"
             >
               <span
                 class="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-full"
@@ -185,7 +185,7 @@ onMounted(() => {
 
             <button
               type="button"
-              class="pill group border border-line bg-white/2 px-7 py-4 text-[0.74rem] font-semibold tracking-[0.18em] text-surface uppercase hover:border-line-strong hover:bg-primary/8 hover:shadow-glow"
+              class="pill group border border-line bg-white/2 px-5 py-3 text-[0.68rem] font-semibold tracking-[0.14em] text-surface uppercase hover:border-line-strong hover:bg-primary/8 hover:shadow-glow sm:px-7 sm:py-4 sm:text-[0.74rem] sm:tracking-[0.18em]"
               @click="scrollTo('work')"
             >
               {{ t("hero.ctaPrimary") }}

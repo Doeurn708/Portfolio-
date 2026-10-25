@@ -157,6 +157,7 @@ export const projects: Project[] = [
     language: 'JavaScript',
     updated: '2026-06-03',
     category: 'Frontend',
+    liveUrl: 'https://airpod-shop.vercel.app',
   },
   {
     repo: 'system-management',
@@ -230,6 +231,7 @@ export const projects: Project[] = [
     language: 'Vue',
     updated: '2026-06-16',
     category: 'Frontend',
+    liveUrl: 'https://order-food-doeurn-developers-projects.vercel.app',
   },
   {
     repo: 'crud_mvc',
@@ -295,6 +297,7 @@ export const projects: Project[] = [
     language: 'Vue',
     updated: '2026-05-12',
     category: 'Frontend',
+    liveUrl: 'https://finally-project-doeurn-developers-projects.vercel.app',
   },
   {
     repo: 'Order-Food-Etec',
@@ -359,6 +362,7 @@ export const projects: Project[] = [
     language: 'Vue',
     updated: '2026-07-04',
     category: 'Frontend',
+    liveUrl: 'https://library-system-doeurn-developers-projects.vercel.app',
   },
   // {
   //   repo: 'Java_OOP',
@@ -422,6 +426,7 @@ export const projects: Project[] = [
     language: 'Vue',
     updated: '2026-07-29',
     category: 'Frontend',
+    liveUrl: 'https://portfolio708.vercel.app',
   },
 ]
 

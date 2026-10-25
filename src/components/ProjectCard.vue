@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ArrowUpRight, Github } from 'lucide-vue-next'
+import { RouterLink } from 'vue-router'
+import { ArrowUpRight, ExternalLink, Github } from 'lucide-vue-next'
 import type { EnrichedProject } from '@/composables/useGithubRepos'
 import { useLocale } from '@/composables/useLocale'
 
@@ -12,8 +13,6 @@ const props = withDefaults(
   }>(),
   { variant: 'grid', index: 0 },
 )
-
-const emit = defineEmits<{ open: [project: EnrichedProject] }>()
 
 const { t } = useLocale()
 
@@ -47,8 +46,8 @@ function formatDate(value: string): string {
 
 <template>
   <article
-    class="reveal group relative flex h-full flex-col overflow-hidden rounded-[1.85rem] border border-line bg-ink-900/55 transition-all duration-500 hover:-translate-y-1.5 hover:border-line-strong hover:bg-ink-850/60 hover:shadow-glow"
-    :class="isFeatured ? 'lg:flex-row lg:items-stretch' : ''"
+    class="reveal group relative flex h-full w-full flex-col overflow-hidden rounded-[1.5rem] border border-line bg-ink-900/55 transition-all duration-500 hover:-translate-y-1.5 hover:border-line-strong hover:bg-ink-850/60 hover:shadow-glow sm:rounded-[1.85rem]"
+    :class="isFeatured ? 'sm:flex-row sm:items-stretch' : ''"
     :style="{ '--reveal-delay': `${index * 90}ms` }"
   >
     <!-- Ambient per-card glow -->
@@ -62,11 +61,11 @@ function formatDate(value: string): string {
 
     <!-- ============ Visual panel ============ -->
     <div
-      class="relative flex shrink-0 flex-col justify-between overflow-hidden border-line bg-ink-950/70"
+      class="relative flex w-full shrink-0 flex-col justify-between overflow-hidden border-line bg-ink-950/70"
       :class="
         isFeatured
-          ? 'lg:w-[46%] lg:border-r lg:p-8 p-6 min-h-56'
-          : 'min-h-44 border-b p-6'
+          ? 'sm:w-[48%] sm:border-b-0 sm:border-r sm:p-6 md:w-[46%] md:p-7 lg:p-8 p-4 xs:p-5 min-h-44 sm:min-h-48 md:min-h-52 lg:min-h-56'
+          : 'min-h-36 sm:min-h-40 md:min-h-44 border-b p-4 xs:p-5 sm:p-6'
       "
     >
       <!-- Layered tech mesh -->
@@ -107,7 +106,7 @@ function formatDate(value: string): string {
       <div class="relative mt-auto pt-8">
         <p
           class="font-display leading-none font-bold tracking-[-0.04em] text-transparent"
-          :class="isFeatured ? 'text-[3.2rem]' : 'text-[2.4rem]'"
+          :class="isFeatured ? 'text-[2.6rem] sm:text-[3rem] lg:text-[3.2rem]' : 'text-[2rem] sm:text-[2.4rem]'"
           :style="{
             WebkitTextStroke: '1px rgba(0,229,212,0.42)',
           }"
@@ -124,65 +123,63 @@ function formatDate(value: string): string {
     </div>
 
     <!-- ============ Content panel ============ -->
-    <div class="relative flex flex-1 flex-col p-6 sm:p-7">
+    <div class="relative flex min-w-0 flex-1 flex-col p-4 xs:p-5 sm:p-6 lg:p-7">
       <h3 class="font-display leading-snug font-semibold">
-        <button
-          type="button"
+        <RouterLink
+          :to="{ name: 'project-detail', params: { repo: project.repo } }"
           class="text-left text-surface transition-colors duration-400 after:absolute after:inset-0 after:content-[''] hover:text-aqua-100"
-          :class="isFeatured ? 'text-[1.3rem] sm:text-[1.55rem]' : 'text-[1.15rem] sm:text-[1.3rem]'"
-          @click="emit('open', project)"
+          :class="isFeatured ? 'text-[1.12rem] xs:text-[1.18rem] sm:text-[1.3rem] md:text-[1.4rem] lg:text-[1.5rem] xl:text-[1.55rem]' : 'text-[1.02rem] xs:text-[1.08rem] sm:text-[1.16rem] md:text-[1.22rem] lg:text-[1.26rem] xl:text-[1.3rem]'"
         >
           {{ project.title }}
-        </button>
+        </RouterLink>
       </h3>
 
       <p
-        class="mt-3 text-[0.88rem] leading-relaxed text-muted/85"
-        :class="isFeatured ? 'sm:text-[0.94rem]' : 'line-clamp-3'"
+        class="mt-2 text-[0.8rem] leading-relaxed text-muted/85 xs:mt-2.5 sm:mt-3 sm:text-[0.84rem] md:text-[0.88rem]"
+        :class="isFeatured ? 'lg:text-[0.9rem] xl:text-[0.94rem]' : 'line-clamp-3'"
       >
         {{ project.tagline }}
       </p>
 
       <!-- Tech tags -->
-      <ul class="mt-5 flex flex-wrap gap-1.5">
+      <ul class="mt-4 flex flex-wrap gap-1 sm:mt-5">
         <li v-for="tag in tags" :key="tag">
           <span
-            class="rounded-full border border-line-soft bg-white/[0.02] px-2.5 py-1 text-[0.68rem] text-muted transition-colors duration-400 group-hover:border-line group-hover:text-aqua-100"
+            class="rounded-full border border-line-soft bg-white/[0.02] px-2 py-0.5 text-[0.62rem] text-muted transition-colors duration-400 group-hover:border-line group-hover:text-aqua-100 sm:px-2.5 sm:py-1 sm:text-[0.68rem]"
           >
             {{ tag }}
           </span>
         </li>
         <li v-if="extraTags > 0">
-          <span class="rounded-full border border-line-soft px-2.5 py-1 text-[0.68rem] text-muted-dim">
+          <span class="rounded-full border border-line-soft px-2 py-0.5 text-[0.62rem] text-muted-dim sm:px-2.5 sm:py-1 sm:text-[0.68rem]">
             +{{ extraTags }}
           </span>
         </li>
       </ul>
 
       <!-- Actions (raised above the title's click overlay) -->
-      <div class="relative z-10 mt-auto flex flex-wrap items-center gap-2.5 pt-7">
-        <button
-          type="button"
-          class="pill group/btn border border-line bg-white/[0.02] px-4 py-2.5 text-[0.68rem] font-semibold tracking-[0.14em] text-surface uppercase hover:border-primary/60 hover:bg-primary/10 hover:text-aqua-100"
-          @click="emit('open', project)"
+      <div class="relative z-10 mt-auto flex flex-wrap items-center gap-1 pt-4 xs:gap-1.5 xs:pt-5 sm:gap-2 sm:pt-6 md:gap-2.5 md:pt-7">
+        <RouterLink
+          :to="{ name: 'project-detail', params: { repo: project.repo } }"
+          class="pill group/btn border border-line bg-white/[0.02] px-2.5 py-1.5 text-[0.56rem] font-semibold tracking-[0.1em] text-surface uppercase hover:border-primary/60 hover:bg-primary/10 hover:text-aqua-100 xs:px-3 xs:py-2 xs:text-[0.58rem] xs:tracking-[0.12em] sm:px-4 sm:py-2.5 sm:text-[0.62rem] sm:tracking-[0.14em] md:text-[0.68rem]"
         >
           {{ t('work.viewProject') }}
           <ArrowUpRight
-            :size="13"
+            :size="11"
             :stroke-width="2"
-            class="transition-transform duration-400 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+            class="transition-transform duration-400 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 xs:size-[12px] sm:size-[13px]"
             aria-hidden="true"
           />
-        </button>
+        </RouterLink>
 
         <a
           :href="repoUrl"
           target="_blank"
           rel="noopener noreferrer"
-          class="pill border border-line bg-white/[0.02] px-4 py-2.5 text-[0.68rem] font-semibold tracking-[0.14em] text-muted uppercase hover:border-line-strong hover:text-primary"
+          class="pill border border-line bg-white/[0.02] px-2.5 py-1.5 text-[0.56rem] font-semibold tracking-[0.1em] text-muted uppercase hover:border-line-strong hover:text-primary xs:px-3 xs:py-2 xs:text-[0.58rem] xs:tracking-[0.12em] sm:px-4 sm:py-2.5 sm:text-[0.62rem] sm:tracking-[0.14em] md:text-[0.68rem]"
           :aria-label="`${t('work.viewRepo')}: ${project.repo} on GitHub`"
         >
-          <Github :size="13" :stroke-width="1.8" aria-hidden="true" />
+          <Github :size="11" :stroke-width="1.8" aria-hidden="true" class="xs:size-[12px] sm:size-[13px]" />
           GitHub
         </a>
 
@@ -191,14 +188,19 @@ function formatDate(value: string): string {
           :href="demoUrl"
           target="_blank"
           rel="noopener noreferrer"
-          class="pill border border-line bg-white/[0.02] px-4 py-2.5 text-[0.68rem] font-semibold tracking-[0.14em] text-muted uppercase hover:border-line-strong hover:text-primary"
+          class="pill border border-primary/50 bg-primary/10 px-2.5 py-1.5 text-[0.56rem] font-semibold tracking-[0.1em] text-aqua-100 uppercase hover:border-primary hover:bg-primary/20 xs:px-3 xs:py-2 xs:text-[0.58rem] xs:tracking-[0.12em] sm:px-4 sm:py-2.5 sm:text-[0.62rem] sm:tracking-[0.14em] md:text-[0.68rem]"
+          :aria-label="`${t('work.liveDemo')}: ${project.title}`"
         >
+          <span class="relative flex size-1.5" aria-hidden="true">
+            <span class="absolute inline-flex size-full animate-ping rounded-full bg-primary/70" />
+            <span class="relative inline-flex size-1.5 rounded-full bg-primary" />
+          </span>
           {{ t('work.liveDemo') }}
+          <ExternalLink :size="10" :stroke-width="2" aria-hidden="true" class="xs:size-[11px] sm:size-[12px]" />
         </a>
         <span
           v-else
-          class="text-[0.66rem] tracking-[0.1em] text-muted-dim/70"
-          :title="t('work.noDemo')"
+          class="text-[0.54rem] tracking-[0.06em] text-muted-dim/70 xs:text-[0.56rem] xs:tracking-[0.08em] sm:text-[0.6rem] sm:tracking-[0.1em] md:text-[0.66rem]"
         >
           {{ t('work.noDemo') }}
         </span>

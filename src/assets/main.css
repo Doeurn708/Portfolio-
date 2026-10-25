@@ -26,6 +26,8 @@
   --color-line-strong: rgb(0 229 212 / 0.42);
   --color-line-soft: rgb(0 229 212 / 0.1);
 
+  --breakpoint-xs: 26rem;
+
   --font-display: 'Sora', 'Noto Sans Khmer', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Inter', 'Noto Sans Khmer', ui-sans-serif, system-ui, sans-serif;
 
@@ -95,30 +97,33 @@
     border-color: var(--color-line);
   }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 6.5rem;
+  /* `clip` (not `hidden`) guarantees no horizontal scrollbar without
+     creating a scroll container that would break position: sticky. */
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
   html {
-    -webkit-text-size-adjust: 100%;
     scroll-padding-top: 7rem;
-    /* `clip` (not `hidden`) guarantees no horizontal scrollbar without
-       creating a scroll container that would break position: sticky. */
-    overflow-x: clip;
   }
+}
 
-  @media (max-width: 768px) {
-    html {
-      scroll-padding-top: 5.5rem;
-    }
-  }
-
-  body {
-    background-color: var(--color-ink-950);
-    color: var(--color-surface);
-    font-family: var(--font-sans);
-    font-feature-settings: 'ss01', 'cv11';
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: clip;
-    min-height: 100vh;
-  }
+body {
+  background-color: var(--color-ink-950);
+  color: var(--color-surface);
+  font-family: var(--font-sans);
+  font-feature-settings: 'ss01', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+  max-width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+}
 
   h1,
   h2,
@@ -184,8 +189,14 @@
   width: 100%;
   margin-inline: auto;
   max-width: 84rem;
-  padding-inline: 1.25rem;
+  padding-inline: 1rem;
+  @media (min-width: 375px) {
+    padding-inline: 1.25rem;
+  }
   @media (min-width: 640px) {
+    padding-inline: 1.75rem;
+  }
+  @media (min-width: 1024px) {
     padding-inline: 2rem;
   }
   @media (min-width: 1280px) {

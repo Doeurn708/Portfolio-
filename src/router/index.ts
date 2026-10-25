@@ -8,6 +8,11 @@ const routes: RouteRecordRaw[] = [
     meta: { title: 'Chorm Chandouern — Full-Stack Developer' },
   },
   {
+    path: '/project/:repo',
+    name: 'project-detail',
+    component: () => import('@/views/ProjectDetailView.vue'),
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     redirect: { name: 'home', hash: '#work' },

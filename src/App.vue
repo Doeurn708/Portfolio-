@@ -21,15 +21,7 @@ const { t } = useLocale()
 
   <main id="main" class="relative">
     <RouterView v-slot="{ Component }">
-      <Transition
-        mode="out-in"
-        enter-active-class="transition duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-        enter-from-class="opacity-0 translate-y-2"
-        leave-active-class="transition duration-200 ease-in"
-        leave-to-class="opacity-0"
-      >
-        <component :is="Component" />
-      </Transition>
+      <component :is="Component" />
     </RouterView>
   </main>
 
